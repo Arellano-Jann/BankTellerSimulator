@@ -3,16 +3,11 @@
 
 class Customer{
 private:
-	/* data */
+	int arrivalTime, waitingTime;
 public:
-	Customer(/* args */);
-	~Customer();
+	Customer(int arrivalTime, int waitingTime);
+	void setArrivalTime(int newTime);
+	void setWaitingTime(int newTime);
+	int getArrivalTime();
+	int getWaitingTime();
 };
-
-Customer::Customer(/* args */)
-{
-}
-
-Customer::~Customer()
-{
-}
