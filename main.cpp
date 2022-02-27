@@ -12,6 +12,8 @@
 // Note that when popping prio queue, print a statement listing type of event and current time/arrival time.
 
 #include "Customer.h"
+#include "ArrayQueue.h"
+#include "PriorityQueue.h"
 
 int main(){
 
