@@ -10,3 +10,10 @@
 			// Else output “Waiting for customer” and then set customer.arrivalTime to the current time. Take the customer to the teller and pop the front of the queue.
 	// If the teller is not available, put in the back of queue
 // Note that when popping prio queue, print a statement listing type of event and current time/arrival time.
+
+#include "Customer.h"
+
+int main(){
+
+	return 1;
+}
