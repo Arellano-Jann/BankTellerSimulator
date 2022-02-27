@@ -1,0 +1,12 @@
+// Pseudo Code
+
+// Takes in file
+// Puts each line into a priority queue.
+// Has a while loop
+	// The while loop iterates through based on if there is still events on the priority queue
+	// If the teller is available, set the customers arrival time to the current time and pop the prio queue.
+		// When the customer departs, set the current time to += the waiting time and check if front of queue arrival time is less than the current time.
+			// If front of queue arrival time is less than the current time, take the customer to the teller. This is done by setting the customer.arrivalTime to the current time and popping the front of the queue.
+			// Else output “Waiting for customer” and then set customer.arrivalTime to the current time. Take the customer to the teller and pop the front of the queue.
+	// If the teller is not available, put in the back of queue
+// Note that when popping prio queue, print a statement listing type of event and current time/arrival time.
