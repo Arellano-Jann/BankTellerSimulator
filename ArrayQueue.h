@@ -1,7 +1,10 @@
 #pragma once
 #define ARRAYQUEUE_H
 
-class ArrayQueue{
+#include "QueueInterface.h"
+
+template<typename T>
+class ArrayQueue : public QueueInterface<T>{
 private:
 	/* data */
 public:
@@ -9,10 +12,4 @@ public:
 	~ArrayQueue();
 };
 
-ArrayQueue::ArrayQueue(/* args */)
-{
-}
-
-ArrayQueue::~ArrayQueue()
-{
-}
+#include "ArrayQueue.cpp"

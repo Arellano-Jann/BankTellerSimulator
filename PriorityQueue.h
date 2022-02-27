@@ -1,7 +1,11 @@
 #pragma once
 #define PRIORITYQUEUE_H
 
-class PriorityQueue{
+#include "QueueInterface.h"
+#include "ArrayQueue.h"
+
+template<typename T>
+class PriorityQueue : public QueueInterface<T>{
 private:
 	/* data */
 public:
@@ -9,10 +13,6 @@ public:
 	~PriorityQueue();
 };
 
-PriorityQueue::PriorityQueue(/* args */)
-{
-}
 
-PriorityQueue::~PriorityQueue()
-{
-}
+
+#include "PriorityQueue.cpp"
