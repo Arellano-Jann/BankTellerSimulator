@@ -1,3 +1,14 @@
+/**
+ * @file main.cpp
+ * @author Jann Arellano and Jenavieve Layosa
+ * @brief 
+ * @version 0.1
+ * @date 2022-02-26
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
+
 // Pseudo Code
 
 // Takes in file
