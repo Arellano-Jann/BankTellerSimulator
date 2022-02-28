@@ -10,6 +10,10 @@ private:
 	/* data */
 public:
 	PriorityQueue(/* args */);
+	bool isEmpty() const override;
+	bool enqueue(const T& newEntry) override;
+	bool dequeue() override;
+	T peekFront() override;
 	~PriorityQueue();
 };
 
