@@ -7,7 +7,10 @@ template<typename T>
 class ArrayQueue : public QueueInterface<T>{
 private:
 	int front = 0;
-	int array[]; // rememeber that it is a circular array
+	int back = 0;
+	int itemCount = 0;
+	int capacity = 50;
+	T items[capacity]; // rememeber that it is a circular array
 public:
 	ArrayQueue(/* args */);
 	bool isEmpty() const override;
