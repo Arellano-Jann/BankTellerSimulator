@@ -6,9 +6,9 @@
 template<typename T>
 class ArrayQueue : public QueueInterface<T>{
 private:
-	int frontIndex = 0;
-	int backIndex = 0;
-	int capacity = 10;
+	int frontIndex = -1;
+	int backIndex = -1;
+	int capacity;
 	T items[capacity]; // rememeber that it is a circular array
 public:
 	ArrayQueue(int capacity);
