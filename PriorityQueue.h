@@ -13,7 +13,7 @@ public:
 	bool isEmpty() const override;
 	bool enqueue(const T& newEntry) override;
 	bool dequeue() override;
-	T peekFront() override;
+	T peekFront() const override;
 	~PriorityQueue();
 };
 
