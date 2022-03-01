@@ -18,7 +18,14 @@ bool PriorityQueue::isEmpty() const{
 
 template<typename T>
 bool PriorityQueue::enqueue(const T& newEntry){
+    if (isEmpty()){
+        front++;
+        back++;
+        items[back] = newEntry; // sets both front and back to be the same element
+    }
+    else if (front == back){ // then it's the first element
 
+    }
 }
 
 template<typename T>
@@ -27,6 +34,6 @@ bool PriorityQueue::dequeue(){
 }
 
 template<typename T>
-T PriorityQueue::peekFront(){
-
+T PriorityQueue::peekFront() const{
+    return items[front];
 }

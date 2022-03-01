@@ -22,6 +22,6 @@ bool PriorityQueue::dequeue(){
 }
 
 template<typename T>
-T PriorityQueue::peekFront(){
+T PriorityQueue::peekFront() const{
 
 }
