@@ -1,12 +1,10 @@
 template<typename T>
-ArrayQueue::ArrayQueue(/* args */)
-{
-}
+ArrayQueue::ArrayQueue(int capacity)
+    : capacity(capacity)
+    {}
 
 template<typename T>
-ArrayQueue::~ArrayQueue()
-{
-}
+ArrayQueue::~ArrayQueue(){ while ( dequeue() ) }
 
 template<typename T>
 bool PriorityQueue::isEmpty() const{
