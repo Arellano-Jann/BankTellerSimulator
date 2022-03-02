@@ -19,19 +19,19 @@ int Tracker :: getDuration(){
 bool Tracker :: getType(){
     return type;
 }
-void Tracker :: setType(int newTime){
+void Tracker :: setTime(int newTime){
     time = newTime;
 }
 void Tracker :: setDuration(int newDuration){
     duration = newDuration;
 }
-void setType(bool newType){
+void Tracker :: setType(bool newType){
     type = newType;
 }
-Tracker Tracker :: operator <(Tracker person1, Tracker person2){
+bool Tracker :: operator <(Tracker person1, Tracker person2){
     if(person1.getTime() < person2.getTime()){
-        return person1;
+        return true;
     } else {
-        return person2;
+        return false;
     }
 }
