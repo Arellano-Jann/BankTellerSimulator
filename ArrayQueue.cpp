@@ -12,28 +12,31 @@ template<typename T>
 ArrayQueue::~ArrayQueue(){ while ( dequeue() ) }
 
 template<typename T>
-bool PriorityQueue::isEmpty() const{
+bool ArrayQueue::isEmpty() const{
     return front == -1;
 }
 
 template<typename T>
-bool PriorityQueue::enqueue(const T& newEntry){
+bool ArrayQueue::enqueue(const T& newEntry){
+    tFront = front % capacity; // index of front
+    tBack = back % capacity; // index of back
     if (isEmpty()){
         front++;
         back++;
         items[back] = newEntry; // sets both front and back to be the same element
     }
     else if (front == back){ // then it's the first element
-
+        back++;
+        items[back] = newEntry;
     }
 }
 
 template<typename T>
-bool PriorityQueue::dequeue(){
+bool ArrayQueue::dequeue(){
 
 }
 
 template<typename T>
-T PriorityQueue::peekFront() const{
+T ArrayQueue::peekFront() const{
     return items[front];
 }
