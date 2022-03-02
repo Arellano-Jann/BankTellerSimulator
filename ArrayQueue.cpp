@@ -18,17 +18,21 @@ bool ArrayQueue::isEmpty() const{
 
 template<typename T>
 bool ArrayQueue::enqueue(const T& newEntry){
-    tFront = front % capacity; // index of front
-    tBack = back % capacity; // index of back
     if (isEmpty()){
         front++;
         back++;
         items[back] = newEntry; // sets both front and back to be the same element
+        return true;
     }
     else if (front == back){ // then it's the first element
         back++;
+        front %= capacity; // index of front
+        back %= capacity; // index of back
         items[back] = newEntry;
+        return true;
     }
+    // is there any checks that i'm missing??? i feel like there are
+    return false;
 }
 
 template<typename T>
