@@ -24,9 +24,8 @@ bool ArrayQueue::enqueue(const T& newEntry){
         items[back] = newEntry; // sets both front and back to be the same element
         return true;
     }
-    else if (front == back){ // then it's the first element
+    else{
         back++;
-        front %= capacity; // index of front
         back %= capacity; // index of back
         items[back] = newEntry;
         return true;
@@ -37,6 +36,9 @@ bool ArrayQueue::enqueue(const T& newEntry){
 
 template<typename T>
 bool ArrayQueue::dequeue(){
+    if (isEmpty()){ return false; }
+    front = (front + 1) % capacity; // index of front
+    return true;
 
 }
 
