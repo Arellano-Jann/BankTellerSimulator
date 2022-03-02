@@ -28,6 +28,7 @@
 
 int main(){
 
+	
 	return 1;
 }
-bool fileParser(string)
+bool fileParser()
