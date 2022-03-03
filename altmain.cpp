@@ -33,8 +33,8 @@ using namespace std;
 #include "EventTracker.h"
 
 bool fileParser(string filename, PriorityQueue<Customer> &line);
-bool depart(EventTracker event, PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue);
-bool arrive(EventTracker event, PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue);
+bool depart(PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue);
+bool arrive(PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue);
 void output(PriorityQueue<EventTracker> EventQueue);
 
 Customer customer;
@@ -50,8 +50,9 @@ int main(){
 	std::cout << "What's the file name?" << std::endl;
 	std::cin >> file;
 	if (fileParser(file, fileQueue)){
-		
+		for ()
 	}
+	output(EventQueue);
 	return 1;
 }
 bool fileParser(string filename, PriorityQueue<Customer> &fileQueue){
@@ -70,7 +71,7 @@ bool fileParser(string filename, PriorityQueue<Customer> &fileQueue){
 
 }
 
-bool depart(EventTracker event, PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue){
+bool depart(PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue){
 	fileQueue.dequeue();
 		if(!bankQueue.isEmpty()){
 			customer = bankQueue.peekFront(); // sets the front of the bank q to customer
@@ -83,7 +84,7 @@ bool depart(EventTracker event, PriorityQueue<Customer> fileQueue, ArrayQueue<Cu
 		}
 	return false;
 }
-bool arrive(EventTracker event, PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue){ // tbh i don't get the variables
+bool arrive(PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue){ // tbh i don't get the variables
 	if (isTellerAvailable){
 		currentTime = fileQueue.peekFront().getArrivalTime(); // sets the current time to arrival time of customer
 		EventTracker arrivalEvent(currentTime, 0, "arrival");
