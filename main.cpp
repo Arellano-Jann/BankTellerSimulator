@@ -33,6 +33,7 @@ using namespace std;
 
 bool fileParser(string filename, priorityQueue<Customer> &line);
 bool depart();
+bool arriver();
 
 
 
