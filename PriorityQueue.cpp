@@ -27,7 +27,7 @@ bool PriorityQueue::enqueue(const T& newEntry){
     else{
         back++;
         back %= capacity; // index of back
-        for (int i = back; i >= 0; i--){
+        for (int i = back-1; i >= 0; i--){
             items[i+1] = items[i];
             if (items[i] < newEntry){
                 items[i+1] = newEntry;

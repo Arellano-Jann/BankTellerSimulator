@@ -38,7 +38,7 @@ bool arrive(EventTracker event, PriorityQueue<Customer> PQueue, ArrayQueue<Custo
 void output(string eventType, int currentTime);
 
 Customer customer;
-PriorityQueue<Customer> PriQueue;
+PriorityQueue<Customer> PQueue;
 ArrayQueue<Customer> bankLine;
 PriorityQueue<EventTracker> EventQueue;
 bool isTellerAvailable;
@@ -77,8 +77,19 @@ bool depart(EventTracker event, PriorityQueue<EventTracker> PQueue, ArrayQueue<C
 		}
 	
 }
-bool arrive(EventTracker event, PriorityQueue<EventTracker> PQueue, ArrayQueue<Customer> lineQueue){
-	
+bool arrive(EventTracker event, PriorityQueue<EventTracker> PQueue, ArrayQueue<Customer> lineQueue){ // tbh i don't get the variables
+	// figuring this out later tonight
+	if (isTellerAvailable){
+		return true;
+	}
+
+	PQueue.enqueue(event);
+	return false;
+
+// If the teller is available, set the customers arrival time to the current time and pop the prio queue.
+		// When the customer departs, set the current time to += the waiting time and check if front of queue arrival time is less than the current time.
+			// If front of queue arrival time is less than the current time, take the customer to the teller. This is done by setting the customer.arrivalTime to the current time and popping the front of the queue.
+			// Else output “Waiting for customer” and then set customer.arrivalTime to the current time. Take the customer to the teller and pop the front of the queue.
 }
 
 
