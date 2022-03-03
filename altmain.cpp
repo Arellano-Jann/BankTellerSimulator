@@ -35,7 +35,7 @@ using namespace std;
 bool fileParser(string filename, PriorityQueue<Customer> &line);
 bool depart(EventTracker event, PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue);
 bool arrive(EventTracker event, PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue);
-void output(string eventType, int currentTime);
+void output(PriorityQueue<EventTracker> EventQueue);
 
 Customer customer;
 PriorityQueue<Customer> fileQueue; // initial queue
@@ -47,7 +47,11 @@ int currentTime = 0;
 
 
 int main(){
-
+	std::cout << "What's the file name?" << std::endl;
+	std::cin >> file;
+	if (fileParser(file, fileQueue)){
+		
+	}
 	return 1;
 }
 bool fileParser(string filename, PriorityQueue<Customer> &fileQueue){
@@ -75,9 +79,9 @@ bool depart(EventTracker event, PriorityQueue<Customer> fileQueue, ArrayQueue<Cu
 			if (currentTime < customer.getArrivalTime()) currentTime = customer.getArrivalTime();
 			EventTracker departureEvent(currentTime, 0, "departure"); // creates a newEvent for each customers type
 			EventQueue.enqueue(departureEvent);
-			
+			return true;
 		}
-	
+	return false;
 }
 bool arrive(EventTracker event, PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue){ // tbh i don't get the variables
 	if (isTellerAvailable){
