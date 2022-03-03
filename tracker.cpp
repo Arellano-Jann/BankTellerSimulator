@@ -28,8 +28,8 @@ void Tracker :: setDuration(int newDuration){
 void Tracker :: setType(bool newType){
     type = newType;
 }
-bool Tracker :: operator <(Tracker person1, Tracker person2){
-    if(person1.getTime() < person2.getTime()){
+bool Tracker :: operator <(Tracker person1){
+    if(person1.getTime() < time){
         return true;
     } else {
         return false;

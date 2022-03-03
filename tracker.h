@@ -19,7 +19,7 @@ public:
     void setTime(int newTime);
     void setDuration(int newDuration);
     void setType(bool newType);
-    bool operator < (Tracker person1, Tracker person2); // returns the person w the lower time but greater priority
+    bool operator < (Tracker person1); // returns the person w the lower time but greater priority
 
 
 };
