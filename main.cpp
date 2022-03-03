@@ -32,6 +32,8 @@ using namespace std;
 #include "PriorityQueue.h"
 
 bool fileParser(string filename, priorityQueue<Customer> &line);
+bool depart();
+
 
 
 int main(){
