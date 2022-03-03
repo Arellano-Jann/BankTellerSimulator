@@ -33,9 +33,9 @@ using namespace std;
 #include "EventTracker.h"
 
 bool fileParser(string filename, PriorityQueue<Customer> &line);
-bool depart(EventTracker event, PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue);
-bool arrive(EventTracker event, PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue);
-void output(string eventType, int currentTime);
+bool depart(PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue);
+bool arrive(PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue);
+void output(PriorityQueue<EventTracker> EventQueue);
 
 Customer customer;
 PriorityQueue<Customer> fileQueue; // initial queue
@@ -47,7 +47,12 @@ int currentTime = 0;
 
 
 int main(){
-
+	std::cout << "What's the file name?" << std::endl;
+	std::cin >> file;
+	if (fileParser(file, fileQueue)){
+		for ()
+	}
+	output(EventQueue);
 	return 1;
 }
 bool fileParser(string filename, PriorityQueue<Customer> &fileQueue){
@@ -66,7 +71,7 @@ bool fileParser(string filename, PriorityQueue<Customer> &fileQueue){
 
 }
 
-bool depart(EventTracker event, PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue){
+bool depart(PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue){
 	fileQueue.dequeue();
 		if(!bankQueue.isEmpty()){
 			customer = bankQueue.peekFront(); // sets the front of the bank q to customer
@@ -75,11 +80,11 @@ bool depart(EventTracker event, PriorityQueue<Customer> fileQueue, ArrayQueue<Cu
 			if (currentTime < customer.getArrivalTime()) currentTime = customer.getArrivalTime();
 			EventTracker departureEvent(currentTime, 0, "departure"); // creates a newEvent for each customers type
 			EventQueue.enqueue(departureEvent);
-			
+			return true;
 		}
-	
+	return false;
 }
-bool arrive(EventTracker event, PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue){ // tbh i don't get the variables
+bool arrive(PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue){ // tbh i don't get the variables
 	if (isTellerAvailable){
 		currentTime = fileQueue.peekFront().getArrivalTime(); // sets the current time to arrival time of customer
 		EventTracker arrivalEvent(currentTime, 0, "arrival");
@@ -93,6 +98,9 @@ bool arrive(EventTracker event, PriorityQueue<Customer> fileQueue, ArrayQueue<Cu
 	}
 
 	bankQueue.enqueue(fileQueue.peekFront()); // assuming that the event has a proper arrival time etc
+	int arrivalTime = fileQueue.peekFront().getArrivalTime();
+	EventTracker arrivalEvent(arrivalTime, 0, "arrival");
+	EventQueue.enqueue(arrivalEvent);
 	return false;
 
 // If the teller is available, set the customers arrival time to the current time and pop the prio queue.

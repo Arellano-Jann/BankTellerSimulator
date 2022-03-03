@@ -99,6 +99,9 @@ bool arrive(Customer customer, PriorityQueue<Customer> fileQueue, ArrayQueue<Cus
 	}
 
 	bankQueue.enqueue(fileQueue.peekFront()); // assuming that the event has a proper arrival time etc
+	// int arrivalTime = fileQueue.peekFront().getArrivalTime();
+	// EventTracker arrivalEvent(arrivalTime, 0, "arrival");
+	// EventQueue.enqueue(arrivalEvent);
 	return false;
 
 // If the teller is available, set the customers arrival time to the current time and pop the prio queue.

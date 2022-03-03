@@ -29,11 +29,9 @@ void EventTracker :: setType(std::string newType){
     type = newType;
 }
 bool EventTracker :: operator <(EventTracker rhs){
-    if(rhs.getTime() < time){
-        return true;
-    } else {
-        return false;
-    }
+    // if(rhs.getTime() < time) return true;
+    if(time < rhs.getTime()) return true;
+    return false;
 }
 
 
