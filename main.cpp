@@ -33,16 +33,16 @@ using namespace std;
 #include "EventTracker.h"
 
 bool fileParser(string filename, PriorityQueue<Customer> &line);
-bool depart(EventTracker event, PriorityQueue<Customer> PQueue, ArrayQueue<Customer> lineQueue);
-bool arrive(EventTracker event, PriorityQueue<Customer> PQueue, ArrayQueue<Customer> lineQueue);
+bool depart(EventTracker event, PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue);
+bool arrive(EventTracker event, PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue);
 void output(string eventType, int currentTime);
 
 Customer customer;
-PriorityQueue<Customer> PQueue;
-ArrayQueue<Customer> bankLine;
+PriorityQueue<Customer> fileQueue; // initial queue
+ArrayQueue<Customer> bankQueue; // bank line
 PriorityQueue<EventTracker> EventQueue;
-bool isTellerAvailable;
-int currentTime;
+bool isTellerAvailable = true;
+int currentTime = 0;
 
 
 
@@ -66,24 +66,24 @@ bool fileParser(string filename, PriorityQueue<Customer> &line){
 
 }
 
-bool depart(EventTracker event, PriorityQueue<EventTracker> PQueue, ArrayQueue<Customer> lineQueue){
-	PQueue.dequeue();
-		if(!lineQueue.isEmpty()){
-			customer = lineQueue.peekFront();
-			lineQueue.dequeue();
+bool depart(EventTracker event, PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue){
+	fileQueue.dequeue();
+		if(!bankQueue.isEmpty()){
+			customer = bankQueue.peekFront();
+			bankQueue.dequeue();
 			int departureTime = currentTime + customer.getWaitingTime();
 			EventTracker newEvent(customer.getArrivalTime(), departureTime, )
 			
 		}
 	
 }
-bool arrive(EventTracker event, PriorityQueue<EventTracker> PQueue, ArrayQueue<Customer> lineQueue){ // tbh i don't get the variables
-	// figuring this out later tonight
+bool arrive(EventTracker event, PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue){ // tbh i don't get the variables
 	if (isTellerAvailable){
+		bankQueue.peekFront().
 		return true;
 	}
 
-	PQueue.enqueue(event);
+	fileQueue.enqueue(event); // assuming that the event has a proper arrival time etc
 	return false;
 
 // If the teller is available, set the customers arrival time to the current time and pop the prio queue.

@@ -11,6 +11,7 @@ private:
 	int capacity;
 	T items[capacity]; // rememeber that it is a circular array
 public:
+	ArrayQueue();
 	ArrayQueue(int capacity);
 	bool isEmpty() const override;
 	bool enqueue(const T& newEntry) override;
