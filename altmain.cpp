@@ -73,9 +73,8 @@ bool depart(EventTracker event, PriorityQueue<Customer> fileQueue, ArrayQueue<Cu
 			bankQueue.dequeue();
 			currentTime += customer.getWaitingTime(); // calcs departure time
 			if (currentTime < customer.getArrivalTime()) currentTime = customer.getArrivalTime();
-
 			EventTracker departureEvent(currentTime, 0, "departure"); // creates a newEvent for each customers type
-
+			EventQueue.enqueue(departureEvent);
 			
 		}
 	
@@ -84,9 +83,10 @@ bool arrive(EventTracker event, PriorityQueue<Customer> fileQueue, ArrayQueue<Cu
 	if (isTellerAvailable){
 		currentTime = fileQueue.peekFront().getArrivalTime(); // sets the current time to arrival time of customer
 		EventTracker arrivalEvent(currentTime, 0, "arrival");
+		EventQueue.enqueue(arrivalEvent);
 		currentTime += fileQueue.peekFront().getWaitingTime(); // sets the current time to actual departureTime
 		EventTracker departureEvent(currentTime, 0, "departure"); // creates a newEvent for each customers type
-
+		EventQueue.enqueue(departureEvent);
 		fileQueue.dequeue(); // takes off the customer off the queue
 		isTellerAvailable = false;
 		return true;
