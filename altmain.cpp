@@ -71,9 +71,11 @@ bool depart(EventTracker event, PriorityQueue<Customer> fileQueue, ArrayQueue<Cu
 		if(!bankQueue.isEmpty()){
 			customer = bankQueue.peekFront(); // sets the front of the bank q to customer
 			bankQueue.dequeue();
-			int departureTime = currentTime + customer.getWaitingTime(); // calcs departure time
-			EventTracker newEvent(customer.getArrivalTime(), departureTime, "departure"); // creates a newEvent for each customers type
-			currentTime = departureTime; // sets current time to departure time
+			currentTime += customer.getWaitingTime(); // calcs departure time
+			if (currentTime < customer.getArrivalTime()) currentTime = customer.getArrivalTime();
+
+			EventTracker departureEvent(currentTime, 0, "departure"); // creates a newEvent for each customers type
+
 			
 		}
 	
@@ -81,7 +83,10 @@ bool depart(EventTracker event, PriorityQueue<Customer> fileQueue, ArrayQueue<Cu
 bool arrive(EventTracker event, PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue){ // tbh i don't get the variables
 	if (isTellerAvailable){
 		currentTime = fileQueue.peekFront().getArrivalTime(); // sets the current time to arrival time of customer
-		// EventTracker arrivalEvent(currentTime, 0, "arrival");
+		EventTracker arrivalEvent(currentTime, 0, "arrival");
+		currentTime += fileQueue.peekFront().getWaitingTime(); // sets the current time to actual departureTime
+		EventTracker departureEvent(currentTime, 0, "departure"); // creates a newEvent for each customers type
+
 		fileQueue.dequeue(); // takes off the customer off the queue
 		isTellerAvailable = false;
 		return true;
@@ -98,7 +103,10 @@ bool arrive(EventTracker event, PriorityQueue<Customer> fileQueue, ArrayQueue<Cu
 
 
 void output(PriorityQueue<EventTracker> EventQueue){
-	std::string eventType = EventQueue.peekFront().getType();
-	int time = EventQueue.peekFront().getTime();
-	std::cout << "Processing " << eventType << " at time: " << time << std::endl;
+	while (!EventQueue.isEmpty()){
+		std::string eventType = EventQueue.peekFront().getType();
+		int time = EventQueue.peekFront().getTime();
+		std::cout << "Processing " << eventType << " at time: " << time << std::endl;
+		EventQueue.dequeue();
+	}
 }
