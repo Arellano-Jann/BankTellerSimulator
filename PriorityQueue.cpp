@@ -29,7 +29,9 @@ bool PriorityQueue::enqueue(const T& newEntry){
         back %= capacity; // index of back
         for (int i = back-1; i >= 0; i--){
             items[i+1] = items[i];
-            if (items[i] < newEntry){
+            if (items[i] < newEntry){ // if 6 is more than 5, then place 6 above 5
+            // if lower prio vs higher prio, place lower prio below higher prio
+            // left is lower prio. right is higher prio
                 items[i+1] = newEntry;
                 return true;
             }
