@@ -4,5 +4,7 @@ class Event{
     int time;
 
 public:
-	bool operator <(Customer rhs);
+    Event(std::string eventType, int time);
+	bool operator <(Event rhs);
+
 };
