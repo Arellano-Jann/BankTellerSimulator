@@ -3,11 +3,13 @@
 
 class Customer{
 private:
-	int arrivalTime, waitingTime;
+	int arrivalTime, transactionTime, waitingTime;
 public:
-	Customer(int arrivalTime, int waitingTime);
+	Customer(int arrivalTime, int transactionTime, int waitingTime);
 	void setArrivalTime(int newTime);
 	void setWaitingTime(int newTime);
+	void setTransactionTime(int newTime);
 	int getArrivalTime();
+	int getTransactionTime();
 	int getWaitingTime();
 };

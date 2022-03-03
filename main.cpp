@@ -47,15 +47,25 @@ int currentTime = 0;
 
 
 int main(){
+	
+	fileParser("file.txt", fileQueue);
 
+	while(!fileQueue.isEmpty()){
+		Customer currentCustomer = fileQueue.peekFront();
+		currentTime = currentCustomer.getArrivalTime();
+		if(arrive(currentCustomer, fileQueue, bankQueue)){
+			
+		}
+
+	}
 	return 1;
 }
 bool fileParser(string filename, PriorityQueue<Customer> &fileQueue){
 	std::ifstream file(filename);
 	if (file.is_open()){
-		int arrivalTime, waitingTime;
-		while (file << arrivalTime << waitingTime){
-			Customer customer(arrivalTime, waitingTime); // if this doesn't work use getters and setters
+		int arrivalTime, transactionTime;
+				while (file << arrivalTime << transactionTime){
+			Customer customer(arrivalTime, transactionTime, 0); // if this doesn't work use getters and setters
 			fileQueue.enqueue(customer);
 		}
 		file.close();
@@ -66,7 +76,7 @@ bool fileParser(string filename, PriorityQueue<Customer> &fileQueue){
 
 }
 
-bool depart(EventTracker event, PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue){
+bool depart(Customer customer, PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue){
 	fileQueue.dequeue();
 		if(!bankQueue.isEmpty()){
 			customer = bankQueue.peekFront(); // sets the front of the bank q to customer
@@ -78,7 +88,8 @@ bool depart(EventTracker event, PriorityQueue<Customer> fileQueue, ArrayQueue<Cu
 		}
 	
 }
-bool arrive(EventTracker event, PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue){ // tbh i don't get the variables
+bool arrive(Customer customer, PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue){ // tbh i don't get the variables
+	
 	if (isTellerAvailable){
 		currentTime = fileQueue.peekFront().getArrivalTime(); // sets the current time to arrival time of customer
 		// EventTracker arrivalEvent(currentTime, 0, "arrival");
