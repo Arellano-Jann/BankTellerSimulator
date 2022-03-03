@@ -33,17 +33,19 @@ using namespace std;
 
 bool fileParser(string filename, priorityQueue<Customer> &line);
 bool depart();
-bool arriver();
+bool arrive();
 bool isTellerAvailable();
 void output(string eventType, int currentTime);
 
 
 int main(){
 
-	
 	return 1;
 }
-bool fileParser(){
-	
+bool fileParser(string filename, priorityQueue<Customer> &line){
+	std::ifstream file(filename);
+	if (file.is_open()){
+		int arrivalTime, waitingTime;
+	}
 
 }
