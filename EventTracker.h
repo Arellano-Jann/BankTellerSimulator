@@ -7,18 +7,18 @@
 class EventTracker{
 
 private:
-    int time, duration;
-    bool type;
+    int time, departure;
+    std::string type;
 
 public:
     EventTracker();
-    EventTracker(int newTime, int newDuration, bool newType);
+    EventTracker(int newTime, int newDeparture, std::string newType);
     int getTime();
-    int getDuration();
-    bool getType();
+    int getDeparture();
+    std::string getType();
     void setTime(int newTime);
-    void setDuration(int newDuration);
-    void setType(bool newType);
+    void setDeparture(int newDeparture);
+    void setType(std::string newType);
     bool operator < (EventTracker rhs); // returns the person w the lower time but greater priority
 
 

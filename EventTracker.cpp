@@ -2,30 +2,30 @@
 
 EventTracker :: EventTracker(){
         time = 0;
-        duration = 0;
+        departure = 0;
         type = false;
 }
-EventTracker :: EventTracker(int newTime, int newDuration, bool newType){
+EventTracker :: EventTracker(int newTime, int newDeparture, std::string newType){
     time = newTime;
-    duration = newDuration;
+    departure = newDeparture;
     type = newType;
 }
 int EventTracker :: getTime(){
     return time;
 }
-int EventTracker :: getDuration(){
-    return duration;
+int EventTracker :: getDeparture(){
+    return departure;
 }
-bool EventTracker :: getType(){
+std::string EventTracker :: getType(){
     return type;
 }
 void EventTracker :: setTime(int newTime){
     time = newTime;
 }
-void EventTracker :: setDuration(int newDuration){
-    duration = newDuration;
+void EventTracker :: setDeparture(int newDeparture){
+    departure = newDeparture;
 }
-void EventTracker :: setType(bool newType){
+void EventTracker :: setType(std::string newType){
     type = newType;
 }
 bool EventTracker :: operator <(EventTracker rhs){

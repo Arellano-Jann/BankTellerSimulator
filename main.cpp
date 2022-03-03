@@ -30,22 +30,60 @@ using namespace std;
 #include "Customer.h"
 #include "ArrayQueue.h"
 #include "PriorityQueue.h"
+#include "EventTracker.h"
 
-bool fileParser(string filename, priorityQueue<Customer> &line);
-bool depart();
-bool arrive();
-bool isTellerAvailable();
+bool fileParser(string filename, PriorityQueue<Customer> &line);
+bool depart(EventTracker event, PriorityQueue<Customer> PQueue, ArrayQueue<Customer> lineQueue);
+bool arrive(EventTracker event, PriorityQueue<Customer> PQueue, ArrayQueue<Customer> lineQueue);
 void output(string eventType, int currentTime);
+
+Customer customer;
+PriorityQueue<Customer> PriQueue;
+ArrayQueue<Customer> bankLine;
+PriorityQueue<EventTracker> EventQueue;
+bool isTellerAvailable;
+int currentTime;
+
 
 
 int main(){
 
 	return 1;
 }
-bool fileParser(string filename, priorityQueue<Customer> &line){
+bool fileParser(string filename, PriorityQueue<Customer> &line){
 	std::ifstream file(filename);
 	if (file.is_open()){
 		int arrivalTime, waitingTime;
+		while (file << arrivalTime << waitingTime){
+			Customer customer(arrivalTime, waitingTime); // if this doesn't work use getters and setters
+			line.enqueue(customer);
+		}
+		file.close();
+		return true;
 	}
+	file.close();
+	return false;
 
+}
+
+bool depart(EventTracker event, PriorityQueue<EventTracker> PQueue, ArrayQueue<Customer> lineQueue){
+	PQueue.dequeue();
+		if(!lineQueue.isEmpty()){
+			customer = lineQueue.peekFront();
+			lineQueue.dequeue();
+			int departureTime = currentTime + customer.getWaitingTime();
+			EventTracker newEvent(customer.getArrivalTime(), departureTime, )
+			
+		}
+	
+}
+bool arrive(EventTracker event, PriorityQueue<EventTracker> PQueue, ArrayQueue<Customer> lineQueue){
+	
+}
+
+
+void output(PriorityQueue<EventTracker> EventQueue){
+	std::string eventType = EventQueue.peekFront().getType();
+	int time = EventQueue.peekFront().getTime();
+	std::cout << "Processing " << eventType << " at time: " << time << std::endl;
 }
