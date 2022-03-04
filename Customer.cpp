@@ -29,7 +29,7 @@ Customer::Customer(int arrivalTime, int transactionTime, int waitingTime)
 		return waitingTime;
 	}
 
-	bool Customer::operator <(const Customer& rhs){
+	bool Customer::operator <(Customer& rhs){
     // if(rhs.getTime() < time) return true;
     if(arrivalTime < rhs.getArrivalTime()) return true;
     return false;

@@ -13,4 +13,5 @@ public:
 	int getArrivalTime();
 	int getTransactionTime();
 	int getWaitingTime();
+	bool operator <(Customer& rhs);
 };
