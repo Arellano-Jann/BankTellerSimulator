@@ -54,7 +54,9 @@ int main(){
 		Customer currentCustomer = fileQueue.peekFront();
 		currentTime = currentCustomer.getArrivalTime();
 		if(arrive(currentCustomer, fileQueue, bankQueue)){
-			
+			arrive(currentCustomer, fileQueue, bankQueue);
+		} else{
+			depart(currentCustomer, fileQueue, bankQueue);
 		}
 
 	}
