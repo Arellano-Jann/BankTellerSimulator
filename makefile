@@ -2,7 +2,7 @@ HDIR = headers# directories/folders
 CDIR = src
 ODIR = objs
 CPPFLAGS = -std=c++11 -g# flags
-DEPS = $(wildcard $(HDIR)/*.h)
+DEPS = $(wildcard *.h)
 OBJ_FILES = main.o Customer.o Event.o# put all dependencies for driver here
 OBJS = $(patsubst %.o, $(ODIR)/%.o, $(OBJ_FILES))# replaces everything in source ending in arg1 with arg2
 vpath %.h headers# basically a search function
@@ -12,12 +12,12 @@ DIRS = $(HDIR) $(CDIR) $(ODIR)
 $(shell mkdir -p $(DIRS))# makes all directories if it's not there
 
 $(ODIR)/%.o: %.cpp $(DEPS)
-    g++ $(CPPFLAGS) -c $< -o $@
+	g++ $(CPPFLAGS) -c $< -o $@
 
 main: $(OBJS)
-    g++ $(CPPFLAGS) -o $@ $^
+	g++ $(CPPFLAGS) -o $@ $^
 
 clean:
-    rm $(ODIR)/*.o driver
+	rm $(ODIR)/*.o driver
 
 .PHONY: clean all
