@@ -7,8 +7,9 @@
 template<typename T>
 class PriorityQueue : public QueueInterface<T>{
 private:
-	int front = -1;
-	int back = -1;
+	int front;
+	int back;
+	int numItems;
 	static const int capacity = 10;
 	T items[capacity];
 public:
