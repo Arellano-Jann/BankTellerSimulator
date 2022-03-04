@@ -8,6 +8,7 @@ class ArrayQueue : public QueueInterface<T>{
 private:
 	int front;
 	int back;
+	int numItems;
 	static const int capacity = 10;
 	T items[capacity]; // rememeber that it is a circular array
 public:

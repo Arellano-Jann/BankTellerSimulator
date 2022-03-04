@@ -6,6 +6,12 @@
 template<typename T>
 PriorityQueue<T>::PriorityQueue()
     // : capacity(10)
+<<<<<<< HEAD:src/PriorityQueue.cpp
+=======
+    : front(0)
+    , back(0)
+    , numItems(0)
+>>>>>>> 773a268f8425eb9f542c31ecaf67f4d36fb22dc4:PriorityQueue.cpp
     {}
 
 template<typename T>
@@ -13,15 +19,18 @@ PriorityQueue<T>::~PriorityQueue(){ while ( dequeue() ){} }
 
 template<typename T>
 bool PriorityQueue<T>::isEmpty() const{
+<<<<<<< HEAD:src/PriorityQueue.cpp
     return front == -1;
+=======
+    return numItems == 0;
+>>>>>>> 773a268f8425eb9f542c31ecaf67f4d36fb22dc4:PriorityQueue.cpp
 }
 
 template<typename T>
 bool PriorityQueue<T>::enqueue(const T& newEntry){
     if (isEmpty()){
-        front++;
-        back++;
         items[back] = newEntry; // sets both front and back to be the same element
+        numItems++;
         return true;
     }
     else{
@@ -33,6 +42,7 @@ bool PriorityQueue<T>::enqueue(const T& newEntry){
             // if lower prio vs higher prio, place lower prio below higher prio
             // left is lower prio. right is higher prio
                 items[i+1] = newEntry;
+                numItems++;
                 return true;
             }
         }
@@ -45,6 +55,7 @@ template<typename T>
 bool PriorityQueue<T>::dequeue(){
     if (isEmpty()){ return false; }
     front = (front + 1) % capacity; // index of front
+    numItems--;
     return true;
 
 }

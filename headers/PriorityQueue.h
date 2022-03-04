@@ -7,8 +7,14 @@
 template<typename T>
 class PriorityQueue : public QueueInterface<T>{
 private:
+<<<<<<< HEAD:headers/PriorityQueue.h
 	int front = -1;
 	int back = -1;
+=======
+	int front;
+	int back;
+	int numItems;
+>>>>>>> 773a268f8425eb9f542c31ecaf67f4d36fb22dc4:PriorityQueue.h
 	static const int capacity = 10;
 	T items[capacity];
 public:
