@@ -10,13 +10,13 @@ EventTracker :: EventTracker(int newTime, int newDeparture, std::string newType)
     departure = newDeparture;
     type = newType;
 }
-int EventTracker :: getTime(){
+int EventTracker :: getTime() const{
     return time;
 }
-int EventTracker :: getDeparture(){
+int EventTracker :: getDeparture() const{
     return departure;
 }
-std::string EventTracker :: getType(){
+std::string EventTracker :: getType() const{
     return type;
 }
 void EventTracker :: setTime(int newTime){
@@ -28,7 +28,7 @@ void EventTracker :: setDeparture(int newDeparture){
 void EventTracker :: setType(std::string newType){
     type = newType;
 }
-bool EventTracker :: operator <(EventTracker rhs){
+bool EventTracker :: operator <(const EventTracker& rhs){
     // if(rhs.getTime() < time) return true;
     if(time < rhs.getTime()) return true;
     return false;

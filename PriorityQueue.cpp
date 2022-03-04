@@ -1,23 +1,23 @@
+// template<typename T>
+// PriorityQueue<T>::PriorityQueue(int capacity)
+//     : capacity(capacity)
+//     {}
+
 template<typename T>
-PriorityQueue::PriorityQueue(int capacity)
-    : capacity(capacity)
+PriorityQueue<T>::PriorityQueue()
+    // : capacity(10)
     {}
 
 template<typename T>
-PriorityQueue::PriorityQueue()
-    : capacity(10)
-    {}
+PriorityQueue<T>::~PriorityQueue(){ while ( dequeue() ){} }
 
 template<typename T>
-PriorityQueue::~PriorityQueue(){ while ( dequeue() ) }
-
-template<typename T>
-bool PriorityQueue::isEmpty() const{
+bool PriorityQueue<T>::isEmpty() const{
     return front == -1;
 }
 
 template<typename T>
-bool PriorityQueue::enqueue(const T& newEntry){
+bool PriorityQueue<T>::enqueue(const T& newEntry){
     if (isEmpty()){
         front++;
         back++;
@@ -42,7 +42,7 @@ bool PriorityQueue::enqueue(const T& newEntry){
 }
 
 template<typename T>
-bool PriorityQueue::dequeue(){
+bool PriorityQueue<T>::dequeue(){
     if (isEmpty()){ return false; }
     front = (front + 1) % capacity; // index of front
     return true;
@@ -50,6 +50,6 @@ bool PriorityQueue::dequeue(){
 }
 
 template<typename T>
-T PriorityQueue::peekFront() const{
+T PriorityQueue<T>::peekFront() const{
     return items[front];
 }

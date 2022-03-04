@@ -54,7 +54,7 @@ bool fileParser(string filename, PriorityQueue<Customer> &fileQueue){
 	std::ifstream file(filename);
 	if (file.is_open()){
 		int arrivalTime, waitingTime;
-		while (file << arrivalTime << waitingTime){
+		while (file >> arrivalTime >> waitingTime){
 			Customer customer(arrivalTime, waitingTime); // if this doesn't work use getters and setters
 			fileQueue.enqueue(customer);
 		}
@@ -76,7 +76,7 @@ bool depart(EventTracker event, PriorityQueue<Customer> fileQueue, ArrayQueue<Cu
 			currentTime = departureTime; // sets current time to departure time
 			
 		}
-	
+	return false;
 }
 bool arrive(EventTracker event, PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue){ // tbh i don't get the variables
 	if (isTellerAvailable){

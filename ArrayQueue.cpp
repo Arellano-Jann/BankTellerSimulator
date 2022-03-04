@@ -1,23 +1,25 @@
+// template<typename T>
+// ArrayQueue::ArrayQueue(int capacity)
+//     : capacity(capacity)
+//     {}
+
 template<typename T>
-ArrayQueue::ArrayQueue(int capacity)
-    : capacity(capacity)
+ArrayQueue<T>::ArrayQueue()
+    // : capacity(10)
+    : front(-1)
+    , back(-1)
     {}
 
 template<typename T>
-ArrayQueue::ArrayQueue()
-    : capacity(10)
-    {}
+ArrayQueue<T>::~ArrayQueue(){ while ( dequeue() ){} }
 
 template<typename T>
-ArrayQueue::~ArrayQueue(){ while ( dequeue() ) }
-
-template<typename T>
-bool ArrayQueue::isEmpty() const{
+bool ArrayQueue<T>::isEmpty() const{
     return front == -1;
 }
 
 template<typename T>
-bool ArrayQueue::enqueue(const T& newEntry){
+bool ArrayQueue<T>::enqueue(const T& newEntry){
     if (isEmpty()){
         front++;
         back++;
@@ -35,7 +37,7 @@ bool ArrayQueue::enqueue(const T& newEntry){
 }
 
 template<typename T>
-bool ArrayQueue::dequeue(){
+bool ArrayQueue<T>::dequeue(){
     if (isEmpty()){ return false; }
     front = (front + 1) % capacity; // index of front
     return true;
@@ -43,6 +45,6 @@ bool ArrayQueue::dequeue(){
 }
 
 template<typename T>
-T ArrayQueue::peekFront() const{
+T ArrayQueue<T>::peekFront() const{
     return items[front];
 }

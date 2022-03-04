@@ -6,13 +6,13 @@
 template<typename T>
 class ArrayQueue : public QueueInterface<T>{
 private:
-	int front = -1;
-	int back = -1;
-	int capacity;
+	int front;
+	int back;
+	static const int capacity = 10;
 	T items[capacity]; // rememeber that it is a circular array
 public:
 	ArrayQueue();
-	ArrayQueue(int capacity);
+	// ArrayQueue(int capacity);
 	bool isEmpty() const override;
 	bool enqueue(const T& newEntry) override;
 	bool dequeue() override;
