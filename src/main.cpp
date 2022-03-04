@@ -57,8 +57,8 @@ int main(){
 	// if (file.is_open()){
 		int arrivalTime, waitingTime;
 		while (file >> arrivalTime >> waitingTime){
-			Customer customer(arrivalTime, waitingTime); // if this doesn't work use getters and setters
-			fileQueue.enqueue(customer);
+			// Customer customer(arrivalTime, waitingTime); // if this doesn't work use getters and setters
+			fileQueue.enqueue(Customer(arrivalTime, waitingTime));
 		}
 		// file.close();
 		// return true;

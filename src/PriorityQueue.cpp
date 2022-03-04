@@ -6,12 +6,9 @@
 template<typename T>
 PriorityQueue<T>::PriorityQueue()
     // : capacity(10)
-<<<<<<< HEAD:src/PriorityQueue.cpp
-=======
     : front(0)
     , back(0)
     , numItems(0)
->>>>>>> 773a268f8425eb9f542c31ecaf67f4d36fb22dc4:PriorityQueue.cpp
     {}
 
 template<typename T>
@@ -19,11 +16,7 @@ PriorityQueue<T>::~PriorityQueue(){ while ( dequeue() ){} }
 
 template<typename T>
 bool PriorityQueue<T>::isEmpty() const{
-<<<<<<< HEAD:src/PriorityQueue.cpp
-    return front == -1;
-=======
     return numItems == 0;
->>>>>>> 773a268f8425eb9f542c31ecaf67f4d36fb22dc4:PriorityQueue.cpp
 }
 
 template<typename T>

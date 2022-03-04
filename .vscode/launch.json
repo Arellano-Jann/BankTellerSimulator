@@ -8,11 +8,7 @@
 			"name": "g++ - Build and debug active file",
 			"type": "cppdbg",
 			"request": "launch",
-<<<<<<< HEAD
 			"program": "${fileDirname}/../main",
-=======
-			"program": "${fileDirname}/main",
->>>>>>> 773a268f8425eb9f542c31ecaf67f4d36fb22dc4
 			"args": [],
 			"stopAtEntry": false,
 			"cwd": "${fileDirname}",
