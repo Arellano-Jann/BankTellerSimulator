@@ -20,10 +20,9 @@ Customer::Customer()
 	void Customer::setWaitingTime(int newTime){
 		waitingTime = newTime;
 	}
-	int Customer::getArrivalTime() const{
+	int Customer::getArrivalTime() {
 		return arrivalTime;
 	}
-<<<<<<< HEAD
 	int Customer :: getTransactionTime(){
 		return transactionTime;
 	}
