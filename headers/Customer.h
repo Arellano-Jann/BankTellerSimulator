@@ -6,8 +6,10 @@ private:
 	int arrivalTime, waitingTime;
 public:
 	Customer(int arrivalTime, int waitingTime);
+	Customer();
 	void setArrivalTime(int newTime);
 	void setWaitingTime(int newTime);
-	int getArrivalTime();
-	int getWaitingTime();
+	int getArrivalTime() const;
+	int getWaitingTime() const;
+	bool operator < (const Customer& rhs);
 };

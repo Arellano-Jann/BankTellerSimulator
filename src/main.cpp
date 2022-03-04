@@ -37,7 +37,6 @@ bool depart(PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue);
 bool arrive(PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue);
 void output(PriorityQueue<EventTracker> EventQueue);
 
-Customer customer;
 PriorityQueue<Customer> fileQueue; // initial queue
 ArrayQueue<Customer> bankQueue; // bank line
 PriorityQueue<EventTracker> EventQueue;
@@ -77,7 +76,7 @@ bool fileParser(string filename, PriorityQueue<Customer> &fileQueue){
 bool depart(PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue){
 	fileQueue.dequeue();
 		if(!bankQueue.isEmpty()){
-			customer = bankQueue.peekFront(); // sets the front of the bank q to customer
+			Customer customer = bankQueue.peekFront(); // sets the front of the bank q to customer
 			bankQueue.dequeue();
 			currentTime += customer.getWaitingTime(); // calcs departure time
 			if (currentTime < customer.getArrivalTime()) currentTime = customer.getArrivalTime();

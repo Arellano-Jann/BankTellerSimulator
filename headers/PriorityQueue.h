@@ -9,7 +9,7 @@ class PriorityQueue : public QueueInterface<T>{
 private:
 	int front = -1;
 	int back = -1;
-	int capacity;
+	static const int capacity = 10;
 	T items[capacity];
 public:
 	PriorityQueue();

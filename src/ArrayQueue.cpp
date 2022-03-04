@@ -11,7 +11,7 @@ ArrayQueue<T>::ArrayQueue()
     {}
 
 template<typename T>
-ArrayQueue<T>::~ArrayQueue(){ while ( dequeue() ) }
+ArrayQueue<T>::~ArrayQueue(){ while ( dequeue() ){} }
 
 template<typename T>
 bool ArrayQueue<T>::isEmpty() const{

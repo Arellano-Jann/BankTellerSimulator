@@ -1,15 +1,15 @@
-template<typename T>
-PriorityQueue<T>::PriorityQueue(int capacity)
-    : capacity(capacity)
-    {}
+// template<typename T>
+// PriorityQueue<T>::PriorityQueue(int capacity)
+//     : capacity(capacity)
+//     {}
 
 template<typename T>
 PriorityQueue<T>::PriorityQueue()
-    : capacity(10)
+    // : capacity(10)
     {}
 
 template<typename T>
-PriorityQueue<T>::~PriorityQueue(){ while ( dequeue() ) }
+PriorityQueue<T>::~PriorityQueue(){ while ( dequeue() ){} }
 
 template<typename T>
 bool PriorityQueue<T>::isEmpty() const{
