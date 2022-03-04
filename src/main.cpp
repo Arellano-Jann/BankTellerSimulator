@@ -51,9 +51,9 @@ int main(){
 	std::string file;
 	std::cin >> file;
 	if (fileParser(file, fileQueue)){
-		for (){
+		// for (){
 			
-		}
+		// }
 	}
 	output(EventQueue);
 	return 1;
@@ -62,7 +62,7 @@ bool fileParser(string filename, PriorityQueue<Customer> &fileQueue){
 	std::ifstream file(filename);
 	if (file.is_open()){
 		int arrivalTime, waitingTime;
-		while (file << arrivalTime << waitingTime){
+		while (file >> arrivalTime >> waitingTime){
 			Customer customer(arrivalTime, waitingTime); // if this doesn't work use getters and setters
 			fileQueue.enqueue(customer);
 		}
