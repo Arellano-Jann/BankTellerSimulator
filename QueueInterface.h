@@ -1,6 +1,10 @@
 #pragma once
 #define QUEUEINTERFACE_H
 
+
+#include "Customer.h"
+
+
 template<typename T>
 class QueueInterface{
 
