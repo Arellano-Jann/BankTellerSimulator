@@ -86,7 +86,7 @@ bool depart(Customer customer, PriorityQueue<Customer> fileQueue, ArrayQueue<Cus
 			currentTime = departureTime; // sets current time to departure time
 			
 		}
-	
+	return false;
 }
 bool arrive(Customer customer, PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue){ // tbh i don't get the variables
 	

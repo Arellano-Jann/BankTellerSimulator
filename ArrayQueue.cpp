@@ -1,48 +1,48 @@
+// template<typename T>
+// ArrayQueue::ArrayQueue(int capacity)
+//     : capacity(capacity)
+//     {}
+
 template<typename T>
-ArrayQueue::ArrayQueue(int capacity)
-    : capacity(capacity)
+ArrayQueue<T>::ArrayQueue()
+    // : capacity(10)
+    : front(0)
+    , back(0)
+    , numItems(0)
     {}
 
 template<typename T>
-ArrayQueue::ArrayQueue()
-    : capacity(10)
-    {}
+ArrayQueue<T>::~ArrayQueue(){ while ( dequeue() ){} }
 
 template<typename T>
-ArrayQueue::~ArrayQueue(){ while ( dequeue() ) }
-
-template<typename T>
-bool ArrayQueue::isEmpty() const{
-    return front == -1;
+bool ArrayQueue<T>::isEmpty() const{
+    return numItems == 0;
 }
 
 template<typename T>
-bool ArrayQueue::enqueue(const T& newEntry){
+bool ArrayQueue<T>::enqueue(const T& newEntry){
     if (isEmpty()){
-        front++;
-        back++;
         items[back] = newEntry; // sets both front and back to be the same element
+        numItems++;
         return true;
     }
-    else{
-        back++;
-        back %= capacity; // index of back
-        items[back] = newEntry;
-        return true;
-    }
-    // is there any checks that i'm missing??? i feel like there are
-    return false;
+    back++;
+    back %= capacity; // index of back
+    items[back] = newEntry;
+    numItems++;
+    return true;
 }
 
 template<typename T>
-bool ArrayQueue::dequeue(){
+bool ArrayQueue<T>::dequeue(){
     if (isEmpty()){ return false; }
     front = (front + 1) % capacity; // index of front
+    numItems--;
     return true;
 
 }
 
 template<typename T>
-T ArrayQueue::peekFront() const{
+T ArrayQueue<T>::peekFront() const{
     return items[front];
 }
