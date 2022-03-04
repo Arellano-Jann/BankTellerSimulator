@@ -1,17 +1,15 @@
 #include "Customer.h"
 
-Customer::Customer(int arrivalTime, int transactionTime, int waitingTime)
-	: arrivalTime(arrivalTime)
- 	, transactionTime (transactionTime)
-	, waitingTime (waitingTime)
-{}
-
 Customer::Customer()
 	: arrivalTime(0)
 	, transactionTime(0)
 	, waitingTime(0)
 {}
-
+Customer::Customer(int arrivalTime, int transactionTime, int waitingTime)
+	: arrivalTime(arrivalTime)
+ 	, transactionTime (transactionTime)
+	, waitingTime (waitingTime)
+{}
 	void Customer::setArrivalTime(int newTime){
 		arrivalTime = newTime;
 	}

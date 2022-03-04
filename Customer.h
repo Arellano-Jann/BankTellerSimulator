@@ -5,6 +5,7 @@ class Customer{
 private:
 	int arrivalTime, transactionTime, waitingTime;
 public:
+	Customer();
 	Customer(int arrivalTime, int transactionTime, int waitingTime);
 	void setArrivalTime(int newTime);
 	void setWaitingTime(int newTime);
