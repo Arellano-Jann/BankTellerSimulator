@@ -18,6 +18,6 @@ main: $(OBJS)
 	g++ $(CPPFLAGS) -o $@ $^
 
 clean:
-	rm $(ODIR)/*.o driver
+	rm $(ODIR)/*.o main
 
 .PHONY: clean all

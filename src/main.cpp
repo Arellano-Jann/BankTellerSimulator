@@ -25,15 +25,13 @@
 #include <string>
 #include <fstream> 
 
-using namespace std;
-
 #include "../headers/Customer.h"
 #include "../headers/ArrayQueue.h"
 #include "../headers/PriorityQueue.h"
 #include "../headers/EventTracker.h"
 
-bool fileParser(string filename, PriorityQueue<Customer> &line);
-bool depart(PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue);
+bool fileParser(PriorityQueue<Customer> &line);
+bool depart(ArrayQueue<Customer> bankQueue);
 bool arrive(PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue);
 void output(PriorityQueue<EventTracker> EventQueue);
 
@@ -46,42 +44,69 @@ int currentTime = 0;
 
 
 int main(){
-	std::cout << "What's the file name?" << std::endl;
-	std::string file;
-	std::cin >> file;
-	if (fileParser(file, fileQueue)){
-		// for (){
-			
-		// }
-	}
-	output(EventQueue);
-	return 1;
-}
-bool fileParser(string filename, PriorityQueue<Customer> &fileQueue){
+
+// std::ofstream a("file.txt");
+// a << "test";
+// a.close();
+	std::string filename = "file.txt";
+	std::cout << "What's the file name? ";
+	// std::cin >> filename;
+
 	std::ifstream file(filename);
-	if (file.is_open()){
+	// file.open(filename, std::ifstream::in);
+	// if (file.is_open()){
 		int arrivalTime, waitingTime;
 		while (file >> arrivalTime >> waitingTime){
 			Customer customer(arrivalTime, waitingTime); // if this doesn't work use getters and setters
 			fileQueue.enqueue(customer);
 		}
-		file.close();
+		// file.close();
+		// return true;
+	// }
+	file.close();
+	// fileParser(fileQueue);
+	// if (true){
+	// 	{
+	// 		while (!fileQueue.isEmpty()){
+	// 			arrive(fileQueue, bankQueue);
+	// 		}
+	// 		while (!bankQueue.isEmpty()){
+	// 			depart(bankQueue);
+	// 		}
+	// 	}
+	// }
+	// output(EventQueue);
+	return 0;
+}
+bool fileParser(PriorityQueue<Customer> &fileQueue){
+	std::string filename = "file.txt";
+	std::cout << "What's the file name? ";
+	// std::cin >> filename;
+
+	std::ifstream file(filename);
+	// file.open(filename, std::ifstream::in);
+	// if (file.is_open()){
+		int arrivalTime, waitingTime;
+		while (file >> arrivalTime >> waitingTime){
+			Customer customer(arrivalTime, waitingTime); // if this doesn't work use getters and setters
+			fileQueue.enqueue(customer);
+		}
+		// file.close();
 		return true;
-	}
+	// }
 	file.close();
 	return false;
 
 }
 
-bool depart(PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue){
-	fileQueue.dequeue();
+bool depart(ArrayQueue<Customer> bankQueue){
 		if(!bankQueue.isEmpty()){
 			Customer customer = bankQueue.peekFront(); // sets the front of the bank q to customer
-			bankQueue.dequeue();
 			currentTime += customer.getWaitingTime(); // calcs departure time
-			if (currentTime < customer.getArrivalTime()) currentTime = customer.getArrivalTime();
+			if ( currentTime < customer.getArrivalTime() ) currentTime = customer.getArrivalTime();
 			EventTracker departureEvent(currentTime, 0, "departure"); // creates a newEvent for each customers type
 			EventQueue.enqueue(departureEvent);
+			bankQueue.dequeue();
 			return true;
 		}
 	return false;
@@ -98,17 +123,15 @@ bool arrive(PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue){ 
 		isTellerAvailable = false;
 		return true;
 	}
-
-	bankQueue.enqueue(fileQueue.peekFront()); // assuming that the event has a proper arrival time etc
-	int arrivalTime = fileQueue.peekFront().getArrivalTime();
-	EventTracker arrivalEvent(arrivalTime, 0, "arrival");
-	EventQueue.enqueue(arrivalEvent);
+	if (!fileQueue.isEmpty()){
+		bankQueue.enqueue(fileQueue.peekFront()); // assuming that the event has a proper arrival time etc
+		int arrivalTime = fileQueue.peekFront().getArrivalTime();
+		EventTracker arrivalEvent(arrivalTime, 0, "arrival");
+		EventQueue.enqueue(arrivalEvent);
+		fileQueue.dequeue(); // takes off the customer off the queue
+		return true;
+	}
 	return false;
-
-// If the teller is available, set the customers arrival time to the current time and pop the prio queue.
-		// When the customer departs, set the current time to += the waiting time and check if front of queue arrival time is less than the current time.
-			// If front of queue arrival time is less than the current time, take the customer to the teller. This is done by setting the customer.arrivalTime to the current time and popping the front of the queue.
-			// Else output “Waiting for customer” and then set customer.arrivalTime to the current time. Take the customer to the teller and pop the front of the queue.
 }
 
 
