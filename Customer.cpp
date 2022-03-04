@@ -8,6 +8,7 @@ Customer::Customer(int arrivalTime, int transactionTime, int waitingTime)
 
 Customer::Customer()
 	: arrivalTime(0)
+	, transactionTime(0)
 	, waitingTime(0)
 {}
 
@@ -27,7 +28,6 @@ Customer::Customer()
 		return transactionTime;
 	}
 	int Customer::getWaitingTime(){
-=======
 		return waitingTime;
 	}
 
