@@ -1,6 +1,6 @@
 # Homework 4
 
-https://prod.liveshare.vsengsaas.visualstudio.com/join?30A06E5D3EB33197182A23A9875C431D48EF
+https://vscode.dev/liveshare/1132CFB3452AF8C9175B4C2A3B9C0C7C4047
 
 ## Project Goals
 The goal of this project is to:

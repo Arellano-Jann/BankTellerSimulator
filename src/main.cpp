@@ -30,9 +30,9 @@
 #include "../headers/PriorityQueue.h"
 #include "../headers/EventTracker.h"
 
-bool fileParser(PriorityQueue<Customer> &line);
-bool depart(ArrayQueue<Customer> bankQueue);
-bool arrive(PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue);
+bool fileParser(PriorityQueue<Customer> &fileQueue); // this should be a prio q
+bool depart();
+bool arrive();
 void output(PriorityQueue<EventTracker> EventQueue);
 
 PriorityQueue<Customer> fileQueue; // initial queue
@@ -44,19 +44,22 @@ int currentTime = 0;
 
 
 int main(){
-
-	std::string filename = "file.txt";
-	std::cout << "What's the file name? ";
-	std::cin >> filename;
-	fileParser(fileQueue);
-	if (true){
-		{
-			while (!fileQueue.isEmpty()){
-				arrive(fileQueue, bankQueue);
-			}
-			while (!bankQueue.isEmpty()){
-				depart(bankQueue);
-			}
+	// std::cin >> filename;
+	// fileParser(fileQueue);
+	if (fileParser(fileQueue)){
+		std::cout << "What's the file name? ";
+		while (!fileQueue.isEmpty()){
+			arrive();
+			std::cout << "Hachi ";
+		}
+		std::cout << "Ju ";
+		if (bankQueue.isEmpty()){
+			std::cout << "Ichigo ";
+			depart();
+		}
+		while (!bankQueue.isEmpty()){
+			std::cout << "Cinq ";
+			depart();
 		}
 	}
 	output(EventQueue);
@@ -68,22 +71,21 @@ bool fileParser(PriorityQueue<Customer> &fileQueue){
 	// std::cin >> filename;
 
 	std::ifstream file(filename);
-	// file.open(filename, std::ifstream::in);
-	// if (file.is_open()){
+	if (file.is_open()){
 		int arrivalTime, waitingTime;
 		while (file >> arrivalTime >> waitingTime){
 			Customer customer(arrivalTime, waitingTime); // if this doesn't work use getters and setters
 			fileQueue.enqueue(customer);
 		}
-		// file.close();
+		file.close();
 		return true;
-	// }
+	}
 	file.close();
 	return false;
 
 }
 
-bool depart(ArrayQueue<Customer> bankQueue){
+bool depart(){
 		if(!bankQueue.isEmpty()){
 			Customer customer = bankQueue.peekFront(); // sets the front of the bank q to customer
 			currentTime += customer.getWaitingTime(); // calcs departure time
@@ -91,11 +93,13 @@ bool depart(ArrayQueue<Customer> bankQueue){
 			EventTracker departureEvent(currentTime, 0, "departure"); // creates a newEvent for each customers type
 			EventQueue.enqueue(departureEvent);
 			bankQueue.dequeue();
+			std::cout << "Tres ";
 			return true;
 		}
+		std::cout << "Quatre ";
 	return false;
 }
-bool arrive(PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue){ // tbh i don't get the variables
+bool arrive(){ // tbh i don't get the variables
 	if (isTellerAvailable){
 		currentTime = fileQueue.peekFront().getArrivalTime(); // sets the current time to arrival time of customer
 		EventTracker arrivalEvent(currentTime, 0, "arrival");
@@ -105,14 +109,17 @@ bool arrive(PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue){ 
 		EventQueue.enqueue(departureEvent);
 		fileQueue.dequeue(); // takes off the customer off the queue
 		isTellerAvailable = false;
+		std::cout << "Uno ";
 		return true;
 	}
 	if (!fileQueue.isEmpty()){
+		// if( bankQueue.enqueue(fileQueue.peekFront()) ){ std::cout << "Kyu "; }
 		bankQueue.enqueue(fileQueue.peekFront()); // assuming that the event has a proper arrival time etc
 		int arrivalTime = fileQueue.peekFront().getArrivalTime();
 		EventTracker arrivalEvent(arrivalTime, 0, "arrival");
 		EventQueue.enqueue(arrivalEvent);
 		fileQueue.dequeue(); // takes off the customer off the queue
+		std::cout << "Dos ";
 		return true;
 	}
 	return false;

@@ -11,6 +11,8 @@ vpath %.o objs
 DIRS = $(HDIR) $(CDIR) $(ODIR)
 $(shell mkdir -p $(DIRS))# makes all directories if it's not there
 
+all: main
+
 $(ODIR)/%.o: %.cpp $(DEPS)
 	g++ $(CPPFLAGS) -c $< -o $@
 
