@@ -45,37 +45,21 @@ int currentTime = 0;
 
 int main(){
 
-// std::ofstream a("file.txt");
-// a << "test";
-// a.close();
 	std::string filename = "file.txt";
 	std::cout << "What's the file name? ";
-	// std::cin >> filename;
-
-	std::ifstream file(filename);
-	// file.open(filename, std::ifstream::in);
-	// if (file.is_open()){
-		int arrivalTime, waitingTime;
-		while (file >> arrivalTime >> waitingTime){
-			// Customer customer(arrivalTime, waitingTime); // if this doesn't work use getters and setters
-			fileQueue.enqueue(Customer(arrivalTime, waitingTime));
+	std::cin >> filename;
+	fileParser(fileQueue);
+	if (true){
+		{
+			while (!fileQueue.isEmpty()){
+				arrive(fileQueue, bankQueue);
+			}
+			while (!bankQueue.isEmpty()){
+				depart(bankQueue);
+			}
 		}
-		// file.close();
-		// return true;
-	// }
-	file.close();
-	// fileParser(fileQueue);
-	// if (true){
-	// 	{
-	// 		while (!fileQueue.isEmpty()){
-	// 			arrive(fileQueue, bankQueue);
-	// 		}
-	// 		while (!bankQueue.isEmpty()){
-	// 			depart(bankQueue);
-	// 		}
-	// 	}
-	// }
-	// output(EventQueue);
+	}
+	output(EventQueue);
 	return 0;
 }
 bool fileParser(PriorityQueue<Customer> &fileQueue){
