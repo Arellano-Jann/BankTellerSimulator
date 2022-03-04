@@ -27,15 +27,15 @@
 
 using namespace std;
 
-#include "Customer.h"
-#include "ArrayQueue.h"
-#include "PriorityQueue.h"
-#include "EventTracker.h"
+#include "../headers/Customer.h"
+#include "../headers/ArrayQueue.h"
+#include "../headers/PriorityQueue.h"
+#include "../headers/EventTracker.h"
 
 bool fileParser(string filename, PriorityQueue<Customer> &line);
-bool depart(EventTracker event, PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue);
-bool arrive(EventTracker event, PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue);
-void output(string eventType, int currentTime);
+bool depart(PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue);
+bool arrive(PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue);
+void output(PriorityQueue<EventTracker> EventQueue);
 
 Customer customer;
 PriorityQueue<Customer> fileQueue; // initial queue
@@ -47,7 +47,15 @@ int currentTime = 0;
 
 
 int main(){
-
+	std::cout << "What's the file name?" << std::endl;
+	std::string file;
+	std::cin >> file;
+	if (fileParser(file, fileQueue)){
+		for (){
+			
+		}
+	}
+	output(EventQueue);
 	return 1;
 }
 bool fileParser(string filename, PriorityQueue<Customer> &fileQueue){
@@ -66,31 +74,36 @@ bool fileParser(string filename, PriorityQueue<Customer> &fileQueue){
 
 }
 
-bool depart(EventTracker event, PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue){
+bool depart(PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue){
 	fileQueue.dequeue();
 		if(!bankQueue.isEmpty()){
 			customer = bankQueue.peekFront(); // sets the front of the bank q to customer
 			bankQueue.dequeue();
-			int departureTime = currentTime + customer.getWaitingTime(); // calcs departure time
-			EventTracker newEvent(customer.getArrivalTime(), departureTime, "departure"); // creates a newEvent for each customers type
-			currentTime = departureTime; // sets current time to departure time
-			
+			currentTime += customer.getWaitingTime(); // calcs departure time
+			if (currentTime < customer.getArrivalTime()) currentTime = customer.getArrivalTime();
+			EventTracker departureEvent(currentTime, 0, "departure"); // creates a newEvent for each customers type
+			EventQueue.enqueue(departureEvent);
+			return true;
 		}
-	
+	return false;
 }
-bool arrive(EventTracker event, PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue){ // tbh i don't get the variables
+bool arrive(PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue){ // tbh i don't get the variables
 	if (isTellerAvailable){
 		currentTime = fileQueue.peekFront().getArrivalTime(); // sets the current time to arrival time of customer
-		// EventTracker arrivalEvent(currentTime, 0, "arrival");
+		EventTracker arrivalEvent(currentTime, 0, "arrival");
+		EventQueue.enqueue(arrivalEvent);
+		currentTime += fileQueue.peekFront().getWaitingTime(); // sets the current time to actual departureTime
+		EventTracker departureEvent(currentTime, 0, "departure"); // creates a newEvent for each customers type
+		EventQueue.enqueue(departureEvent);
 		fileQueue.dequeue(); // takes off the customer off the queue
 		isTellerAvailable = false;
 		return true;
 	}
 
 	bankQueue.enqueue(fileQueue.peekFront()); // assuming that the event has a proper arrival time etc
-	// int arrivalTime = fileQueue.peekFront().getArrivalTime();
-	// EventTracker arrivalEvent(arrivalTime, 0, "arrival");
-	// EventQueue.enqueue(arrivalEvent);
+	int arrivalTime = fileQueue.peekFront().getArrivalTime();
+	EventTracker arrivalEvent(arrivalTime, 0, "arrival");
+	EventQueue.enqueue(arrivalEvent);
 	return false;
 
 // If the teller is available, set the customers arrival time to the current time and pop the prio queue.
@@ -101,7 +114,10 @@ bool arrive(EventTracker event, PriorityQueue<Customer> fileQueue, ArrayQueue<Cu
 
 
 void output(PriorityQueue<EventTracker> EventQueue){
-	std::string eventType = EventQueue.peekFront().getType();
-	int time = EventQueue.peekFront().getTime();
-	std::cout << "Processing " << eventType << " at time: " << time << std::endl;
+	while (!EventQueue.isEmpty()){
+		std::string eventType = EventQueue.peekFront().getType();
+		int time = EventQueue.peekFront().getTime();
+		std::cout << "Processing " << eventType << " at time: " << time << std::endl;
+		EventQueue.dequeue();
+	}
 }

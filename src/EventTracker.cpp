@@ -1,4 +1,4 @@
-#include "EventTracker.h"
+#include "../headers/EventTracker.h"
 
 EventTracker :: EventTracker(){
         time = 0;

@@ -1,4 +1,4 @@
-#include "Customer.h"
+#include "../headers/Customer.h"
 
 Customer::Customer(int arrivalTime, int waitingTime)
 	: arrivalTime(arrivalTime)

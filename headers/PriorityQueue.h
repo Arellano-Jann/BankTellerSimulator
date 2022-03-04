@@ -1,23 +1,26 @@
 #pragma once
-#define ARRAYQUEUE_H
+#define PRIORITYQUEUE_H
 
 #include "QueueInterface.h"
+#include "ArrayQueue.h"
 
 template<typename T>
-class ArrayQueue : public QueueInterface<T>{
+class PriorityQueue : public QueueInterface<T>{
 private:
 	int front = -1;
 	int back = -1;
 	int capacity;
-	T items[capacity]; // rememeber that it is a circular array
+	T items[capacity];
 public:
-	ArrayQueue();
-	ArrayQueue(int capacity);
+	PriorityQueue();
+	PriorityQueue(int capacity);
 	bool isEmpty() const override;
 	bool enqueue(const T& newEntry) override;
 	bool dequeue() override;
 	T peekFront() const override;
-	~ArrayQueue();
+	~PriorityQueue();
 };
 
-#include "ArrayQueue.cpp"
+
+
+#include "../src/PriorityQueue.cpp"

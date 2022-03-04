@@ -1,8 +1,7 @@
-#pragma once 
+#pragma once
 #define EVENTTRACKER_H
 
-#include "ArrayQueue.h"
-#include "PriorityQueue.h"
+#include <iostream>
 
 class EventTracker{
 
