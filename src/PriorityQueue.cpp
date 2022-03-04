@@ -39,7 +39,6 @@ bool PriorityQueue<T>::enqueue(const T& newEntry){
                 return true;
             }
         }
-        return false; // see if it returns bad or something
     }
     return false;
 }

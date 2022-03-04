@@ -23,13 +23,13 @@ template<typename T>
 bool ArrayQueue<T>::enqueue(const T& newEntry){
     if (isEmpty()){
         items[back] = newEntry; // sets both front and back to be the same element
-        // numItems++;
+        numItems++;
         return true;
     }
     back++;
     back %= capacity; // index of back
     items[back] = newEntry;
-    // numItems++;
+    numItems++;
     return true;
 }
 

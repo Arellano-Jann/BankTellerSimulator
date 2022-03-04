@@ -44,21 +44,21 @@ int currentTime = 0;
 
 
 int main(){
+	// std::cout << "What's the file name? ";
 	// std::cin >> filename;
 	// fileParser(fileQueue);
 	if (fileParser(fileQueue)){
-		std::cout << "What's the file name? ";
 		while (!fileQueue.isEmpty()){
 			arrive();
-			std::cout << "Hachi ";
+			std::cout << "fileQArrive ";
 		}
-		std::cout << "Ju ";
+		std::cout << "AfterArrivals ";
 		if (bankQueue.isEmpty()){
-			std::cout << "Ichigo ";
-			depart();
+			std::cout << "bankQEmpty ";
+			// depart();
 		}
 		while (!bankQueue.isEmpty()){
-			std::cout << "Cinq ";
+			std::cout << "bankQDepart ";
 			depart();
 		}
 	}
@@ -93,33 +93,34 @@ bool depart(){
 			EventTracker departureEvent(currentTime, 0, "departure"); // creates a newEvent for each customers type
 			EventQueue.enqueue(departureEvent);
 			bankQueue.dequeue();
-			std::cout << "Tres ";
+			std::cout << "DepartedFromBankQ ";
 			return true;
 		}
-		std::cout << "Quatre ";
+		std::cout << "DepartFailed ";
 	return false;
 }
 bool arrive(){ // tbh i don't get the variables
 	if (isTellerAvailable){
 		currentTime = fileQueue.peekFront().getArrivalTime(); // sets the current time to arrival time of customer
-		EventTracker arrivalEvent(currentTime, 0, "arrival");
-		EventQueue.enqueue(arrivalEvent);
+		// EventTracker arrivalEvent(currentTime, 0, "arrival");
+		if ( EventQueue.enqueue(EventTracker(currentTime, 0, "arrival")) ) { std::cout << "ArrivalEventQd "; }
 		currentTime += fileQueue.peekFront().getWaitingTime(); // sets the current time to actual departureTime
-		EventTracker departureEvent(currentTime, 0, "departure"); // creates a newEvent for each customers type
-		EventQueue.enqueue(departureEvent);
+		// EventTracker departureEvent(currentTime, 0, "departure"); // creates a newEvent for each customers type
+		if ( EventQueue.enqueue(EventTracker(currentTime, 0, "departure")) ) { std::cout << "DepartureEventQd "; }
 		fileQueue.dequeue(); // takes off the customer off the queue
 		isTellerAvailable = false;
-		std::cout << "Uno ";
+		std::cout << "FinFirstArrive ";
 		return true;
 	}
 	if (!fileQueue.isEmpty()){
-		// if( bankQueue.enqueue(fileQueue.peekFront()) ){ std::cout << "Kyu "; }
-		bankQueue.enqueue(fileQueue.peekFront()); // assuming that the event has a proper arrival time etc
+		if( bankQueue.enqueue(fileQueue.peekFront()) ){ std::cout << "BankQEnqueued "; }
+		// bankQueue.enqueue(fileQueue.peekFront()); // assuming that the event has a proper arrival time etc
 		int arrivalTime = fileQueue.peekFront().getArrivalTime();
-		EventTracker arrivalEvent(arrivalTime, 0, "arrival");
-		EventQueue.enqueue(arrivalEvent);
+		// EventTracker arrivalEvent(arrivalTime, 0, "arrival");
+		// EventQueue.enqueue(arrivalEvent);
+		if ( EventQueue.enqueue(EventTracker(arrivalTime, 0, "arrival")) ){ std::cout << "ArrivalSubQd "; }
 		fileQueue.dequeue(); // takes off the customer off the queue
-		std::cout << "Dos ";
+		std::cout << "FinSubsequentArrive ";
 		return true;
 	}
 	return false;
