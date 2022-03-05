@@ -7,13 +7,13 @@
 template<typename T>
 class PriorityQueue : public QueueInterface<T>{
 private:
-	int front = -1;
-	int back = -1;
-	static const int capacity = 10;
+	int front;
+	int back;
+	int numItems;
+	static const int capacity = 50;
 	T items[capacity];
 public:
 	PriorityQueue();
-	PriorityQueue(int capacity);
 	bool isEmpty() const override;
 	bool enqueue(const T& newEntry) override;
 	bool dequeue() override;
