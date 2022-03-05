@@ -10,7 +10,7 @@ private:
 	int front;
 	int back;
 	int numItems;
-	static const int capacity = 10;
+	static const int capacity = 50;
 	T items[capacity];
 public:
 	PriorityQueue();

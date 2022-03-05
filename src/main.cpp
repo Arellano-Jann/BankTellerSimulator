@@ -39,7 +39,7 @@ PriorityQueue<Customer> fileQueue; // initial queue
 ArrayQueue<Customer> bankQueue; // bank line
 PriorityQueue<EventTracker> EventQueue;
 bool isTellerAvailable = true;
-int currentTime = 0;
+static int currentTime = 0;
 
 
 
