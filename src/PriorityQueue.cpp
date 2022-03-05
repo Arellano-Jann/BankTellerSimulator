@@ -1,11 +1,5 @@
-// template<typename T>
-// PriorityQueue<T>::PriorityQueue(int capacity)
-//     : capacity(capacity)
-//     {}
-
 template<typename T>
 PriorityQueue<T>::PriorityQueue()
-    // : capacity(10)
     : front(0)
     , back(0)
     , numItems(0)
@@ -26,7 +20,7 @@ bool PriorityQueue<T>::enqueue(const T& newEntry){
         numItems++;
         return true;
     }
-    else{
+    else if (numItems < capacity){ // checks if it overwrites valuable data
         back++;
         back %= capacity; // index of back
         for (int i = back-1; i >= 0; i--){

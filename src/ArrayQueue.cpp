@@ -1,11 +1,5 @@
-// template<typename T>
-// ArrayQueue::ArrayQueue(int capacity)
-//     : capacity(capacity)
-//     {}
-
 template<typename T>
 ArrayQueue<T>::ArrayQueue()
-    // : capacity(10)
     : front(0)
     , back(0)
     , numItems(0)
@@ -26,10 +20,12 @@ bool ArrayQueue<T>::enqueue(const T& newEntry){
         numItems++;
         return true;
     }
-    back++;
-    back %= capacity; // index of back
-    items[back] = newEntry;
-    numItems++;
+    if (numItems < capacity){
+        back++;
+        back %= capacity; // index of back
+        items[back] = newEntry;
+        numItems++;
+    }
     return true;
 }
 

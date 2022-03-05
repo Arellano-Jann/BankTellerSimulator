@@ -14,7 +14,6 @@ private:
 	T items[capacity];
 public:
 	PriorityQueue();
-	PriorityQueue(int capacity);
 	bool isEmpty() const override;
 	bool enqueue(const T& newEntry) override;
 	bool dequeue() override;

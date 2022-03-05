@@ -24,7 +24,6 @@ Customer::Customer()
 	}
 
 	bool Customer::operator <(const Customer& rhs){
-    // if(rhs.getTime() < time) return true;
     if(arrivalTime < rhs.getArrivalTime()) return true;
     return false;
 }

@@ -10,12 +10,11 @@ private:
 	int back;
 	int numItems;
 	static const int capacity = 50;
-	T items[capacity]; // rememeber that it is a circular array
+	T items[capacity];
 public:
 	ArrayQueue();
-	// ArrayQueue(int capacity);
 	bool isEmpty() const override;
-	bool enqueue(const T& newEntry) override; // add a "if numItems valid thing"
+	bool enqueue(const T& newEntry) override;
 	bool dequeue() override;
 	T peekFront() const override;
 	~ArrayQueue();
