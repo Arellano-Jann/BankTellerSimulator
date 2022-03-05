@@ -15,7 +15,7 @@ public:
 	ArrayQueue();
 	// ArrayQueue(int capacity);
 	bool isEmpty() const override;
-	bool enqueue(const T& newEntry) override;
+	bool enqueue(const T& newEntry) override; // add a "if numItems valid thing"
 	bool dequeue() override;
 	T peekFront() const override;
 	~ArrayQueue();
