@@ -3,13 +3,15 @@
 
 class Customer{
 private:
-	int arrivalTime, waitingTime;
+	int arrivalTime, transactionTime, waitingTime;
 public:
-	Customer(int arrivalTime, int waitingTime);
 	Customer();
+	Customer(int arrivalTime, int transactionTime, int waitingTime);
 	void setArrivalTime(int newTime);
 	void setWaitingTime(int newTime);
-	int getArrivalTime() const;
-	int getWaitingTime() const;
-	bool operator < (const Customer& rhs);
+	void setTransactionTime(int newTime);
+	int getArrivalTime();
+	int getTransactionTime();
+	int getWaitingTime();
+	bool operator <(Customer& rhs);
 };

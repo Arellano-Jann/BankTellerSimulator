@@ -1,29 +1,35 @@
 #include "Customer.h"
 
-Customer::Customer(int arrivalTime, int waitingTime)
-	: arrivalTime(arrivalTime)
-	, waitingTime(waitingTime)
-{}
-
 Customer::Customer()
 	: arrivalTime(0)
+	, transactionTime(0)
 	, waitingTime(0)
 {}
-
+Customer::Customer(int arrivalTime, int transactionTime, int waitingTime)
+	: arrivalTime(arrivalTime)
+ 	, transactionTime (transactionTime)
+	, waitingTime (waitingTime)
+{}
 	void Customer::setArrivalTime(int newTime){
 		arrivalTime = newTime;
+	}
+	void Customer :: setTransactionTime(int newTime){
+		transactionTime = newTime;
 	}
 	void Customer::setWaitingTime(int newTime){
 		waitingTime = newTime;
 	}
-	int Customer::getArrivalTime() const{
+	int Customer::getArrivalTime() {
 		return arrivalTime;
 	}
-	int Customer::getWaitingTime() const{
+	int Customer :: getTransactionTime(){
+		return transactionTime;
+	}
+	int Customer::getWaitingTime(){
 		return waitingTime;
 	}
 
-	bool Customer::operator <(const Customer& rhs){
+	bool Customer::operator <(Customer& rhs){
     // if(rhs.getTime() < time) return true;
     if(arrivalTime < rhs.getArrivalTime()) return true;
     return false;
