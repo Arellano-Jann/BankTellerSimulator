@@ -1,4 +1,3 @@
-
 PriorityQueue<Customer> fileQueue;
 ArrayQueue<Customer> bankQueue;
 PriorityQueue<Event> EventQueue;
