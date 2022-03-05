@@ -16,16 +16,16 @@
 #include "../headers/Customer.h"
 #include "../headers/ArrayQueue.h"
 #include "../headers/PriorityQueue.h"
-#include "../headers/EventTracker.h"
+#include "../headers/Event.h"
 
 bool fileParser(PriorityQueue<Customer> &fileQueue);
 bool depart();
 bool arrive();
-void output(PriorityQueue<EventTracker> EventQueue);
+void output(PriorityQueue<Event> EventQueue);
 
 PriorityQueue<Customer> fileQueue;
 ArrayQueue<Customer> bankQueue;
-PriorityQueue<EventTracker> EventQueue;
+PriorityQueue<Event> EventQueue;
 bool isTellerAvailable = true;
 static int currentTime = 0;
 
@@ -68,7 +68,7 @@ bool depart(){
 			Customer customer = bankQueue.peekFront(); // sets the front of the bank q to customer
 			if ( currentTime < customer.getArrivalTime() ) currentTime = customer.getArrivalTime();
 			currentTime += customer.getWaitingTime(); // calcs departure time 
-			EventQueue.enqueue(EventTracker(currentTime, 0, "departure")); // creates a newEvent for each customers type
+			EventQueue.enqueue(Event(currentTime, "departure")); // creates a newEvent for each customers type
 			bankQueue.dequeue();
 			return true;
 		}
@@ -77,9 +77,9 @@ bool depart(){
 bool arrive(){
 	if (isTellerAvailable){
 		currentTime = fileQueue.peekFront().getArrivalTime(); // sets the current time to arrival time of customer
-		EventQueue.enqueue(EventTracker(currentTime, 0, "arrival"));
+		EventQueue.enqueue(Event(currentTime, "arrival"));
 		currentTime += fileQueue.peekFront().getWaitingTime(); // sets the current time to actual departureTime
-		EventQueue.enqueue(EventTracker(currentTime, 0, "departure")); // creates a newEvent for each customers type
+		EventQueue.enqueue(Event(currentTime, "departure")); // creates a newEvent for each customers type
 		fileQueue.dequeue(); // takes off the customer off the queue
 		isTellerAvailable = false;
 		return true;
@@ -87,7 +87,7 @@ bool arrive(){
 	if (!fileQueue.isEmpty()){
 		bankQueue.enqueue(fileQueue.peekFront()); // assuming that the event has a proper arrival time etc
 		int arrivalTime = fileQueue.peekFront().getArrivalTime();
-		EventQueue.enqueue(EventTracker(arrivalTime, 0, "arrival"));
+		EventQueue.enqueue(Event(arrivalTime, "arrival"));
 		fileQueue.dequeue(); // takes off the customer off the queue
 		return true;
 	}
@@ -95,7 +95,7 @@ bool arrive(){
 }
 
 
-void output(PriorityQueue<EventTracker> EventQueue){
+void output(PriorityQueue<Event> EventQueue){
 	while (!EventQueue.isEmpty()){
 		std::string eventType = EventQueue.peekFront().getType();
 		int time = EventQueue.peekFront().getTime();
