@@ -1,6 +1,7 @@
 /**
  * @file main.cpp
  * @author Jann Arellano and Jenavieve Layosa
+ * @team_name team7
  * @brief 
  * @version 0.1
  * @date 2022-02-26
