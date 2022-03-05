@@ -1,31 +1,20 @@
-#include "../headers/Customer.h"
-#include "../headers/ArrayQueue.h"
-#include "../headers/PriorityQueue.h"
-#include "../headers/EventTracker.h"
-#include <iostream> 
-#include <string>
-#include <fstream> 
 
-using namespace std;
-
-bool fileParser(string filename, PriorityQueue<Customer> &line);
-bool depart(PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue);
-bool arrive(PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue);
-void output(PriorityQueue<EventTracker> EventQueue);
-
-PriorityQueue<Customer> fileQueue; // initial queue
-ArrayQueue<Customer> bankQueue; // bank line
-PriorityQueue<EventTracker> EventQueue;
+PriorityQueue<Customer> fileQueue;
+ArrayQueue<Customer> bankQueue;
+PriorityQueue<Event> EventQueue;
 bool isTellerAvailable = true;
-int currentTime = 0;
+static int currentTime = 0;
 
+bool fileParser(){
+	std::string filename = "file.txt";
+	std::cout << "What's the file name? ";
+	std::cin >> filename;
 
-bool fileParser(string filename, PriorityQueue<Customer> &fileQueue){
 	std::ifstream file(filename);
 	if (file.is_open()){
 		int arrivalTime, waitingTime;
 		while (file >> arrivalTime >> waitingTime){
-			Customer customer(arrivalTime, waitingTime); // if this doesn't work use getters and setters
+			Customer customer(arrivalTime, waitingTime);
 			fileQueue.enqueue(customer);
 		}
 		file.close();
@@ -36,46 +25,39 @@ bool fileParser(string filename, PriorityQueue<Customer> &fileQueue){
 
 }
 
-bool depart(PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue){
-	fileQueue.dequeue();
+bool depart(){
 		if(!bankQueue.isEmpty()){
 			Customer customer = bankQueue.peekFront(); // sets the front of the bank q to customer
+			if ( currentTime < customer.getArrivalTime() ) currentTime = customer.getArrivalTime();
+			currentTime += customer.getWaitingTime(); // calcs departure time 
+			EventQueue.enqueue(Event(currentTime, "departure")); // creates a newEvent for each customers type
 			bankQueue.dequeue();
-			currentTime += customer.getWaitingTime(); // calcs departure time
-			if (currentTime < customer.getArrivalTime()) currentTime = customer.getArrivalTime();
-			EventTracker departureEvent(currentTime, 0, "departure"); // creates a newEvent for each customers type
-			EventQueue.enqueue(departureEvent);
 			return true;
 		}
 	return false;
 }
-bool arrive(PriorityQueue<Customer> fileQueue, ArrayQueue<Customer> bankQueue){ // tbh i don't get the variables
+bool arrive(){
 	if (isTellerAvailable){
 		currentTime = fileQueue.peekFront().getArrivalTime(); // sets the current time to arrival time of customer
-		EventTracker arrivalEvent(currentTime, 0, "arrival");
-		EventQueue.enqueue(arrivalEvent);
+		EventQueue.enqueue(Event(currentTime, "arrival"));
 		currentTime += fileQueue.peekFront().getWaitingTime(); // sets the current time to actual departureTime
-		EventTracker departureEvent(currentTime, 0, "departure"); // creates a newEvent for each customers type
-		EventQueue.enqueue(departureEvent);
+		EventQueue.enqueue(Event(currentTime, "departure")); // creates a newEvent for each customers type
 		fileQueue.dequeue(); // takes off the customer off the queue
 		isTellerAvailable = false;
 		return true;
 	}
-
-	bankQueue.enqueue(fileQueue.peekFront()); // assuming that the event has a proper arrival time etc
-	int arrivalTime = fileQueue.peekFront().getArrivalTime();
-	EventTracker arrivalEvent(arrivalTime, 0, "arrival");
-	EventQueue.enqueue(arrivalEvent);
+	if (!fileQueue.isEmpty()){
+		bankQueue.enqueue(fileQueue.peekFront()); // assuming that the event has a proper arrival time etc
+		int arrivalTime = fileQueue.peekFront().getArrivalTime();
+		EventQueue.enqueue(Event(arrivalTime, "arrival"));
+		fileQueue.dequeue(); // takes off the customer off the queue
+		return true;
+	}
 	return false;
-
-// If the teller is available, set the customers arrival time to the current time and pop the prio queue.
-		// When the customer departs, set the current time to += the waiting time and check if front of queue arrival time is less than the current time.
-			// If front of queue arrival time is less than the current time, take the customer to the teller. This is done by setting the customer.arrivalTime to the current time and popping the front of the queue.
-			// Else output “Waiting for customer” and then set customer.arrivalTime to the current time. Take the customer to the teller and pop the front of the queue.
 }
 
 
-void output(PriorityQueue<EventTracker> EventQueue){
+void output(PriorityQueue<Event> EventQueue){
 	while (!EventQueue.isEmpty()){
 		std::string eventType = EventQueue.peekFront().getType();
 		int time = EventQueue.peekFront().getTime();
