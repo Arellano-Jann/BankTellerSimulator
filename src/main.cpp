@@ -88,8 +88,9 @@ bool fileParser(PriorityQueue<Customer> &fileQueue){
 bool depart(){
 		if(!bankQueue.isEmpty()){
 			Customer customer = bankQueue.peekFront(); // sets the front of the bank q to customer
-			currentTime += customer.getWaitingTime(); // calcs departure time
+			// currentTime += customer.getWaitingTime(); // calcs departure time
 			if ( currentTime < customer.getArrivalTime() ) currentTime = customer.getArrivalTime();
+			currentTime += customer.getWaitingTime(); // calcs departure time
 			EventTracker departureEvent(currentTime, 0, "departure"); // creates a newEvent for each customers type
 			EventQueue.enqueue(departureEvent);
 			bankQueue.dequeue();
