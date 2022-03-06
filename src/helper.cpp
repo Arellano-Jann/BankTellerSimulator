@@ -3,6 +3,7 @@ ArrayQueue<Customer> bankQueue;
 PriorityQueue<Event> EventQueue;
 bool isTellerAvailable = true;
 static int currentTime = 0;
+static int customerCount = 0;
 
 bool fileParser(){
 	std::string filename = "file.txt";
@@ -43,6 +44,7 @@ bool arrive(){
 		EventQueue.enqueue(Event(currentTime, "departure")); // creates a newEvent for each customers type
 		fileQueue.dequeue(); // takes off the customer off the queue
 		isTellerAvailable = false;
+		customerCount++;
 		return true;
 	}
 	if (!fileQueue.isEmpty()){
@@ -50,6 +52,7 @@ bool arrive(){
 		int arrivalTime = fileQueue.peekFront().getArrivalTime();
 		EventQueue.enqueue(Event(arrivalTime, "arrival"));
 		fileQueue.dequeue(); // takes off the customer off the queue
+		customerCount++;
 		return true;
 	}
 	return false;
@@ -63,4 +66,8 @@ void output(PriorityQueue<Event> EventQueue){
 		std::cout << "Processing " << eventType << " at time: " << time << std::endl;
 		EventQueue.dequeue();
 	}
+}
+
+void output(){
+	std::cout << "Number of customers: " << customerCount << std::endl;
 }

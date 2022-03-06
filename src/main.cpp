@@ -30,5 +30,6 @@ int main(){
 		}
 	}
 	output(EventQueue);
+	output();
 	return 0;
 }
