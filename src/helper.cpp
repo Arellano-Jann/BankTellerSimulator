@@ -4,7 +4,7 @@ PriorityQueue<Event> EventQueue;
 bool isTellerAvailable = true;
 static int currentTime = 0;
 static int customerCount = 0;
-static int totalWaitingTime = 0;
+static float totalWaitingTime = 0;
 
 bool fileParser(){
 	std::string filename = "file.txt";
