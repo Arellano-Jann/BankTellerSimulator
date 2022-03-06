@@ -6,8 +6,6 @@
 template<typename T>
 class ArrayQueue : public QueueInterface<T>{
 private:
-	// int front;
-	// int back;
 	int front;
 	int back;
 	int numItems;
@@ -22,4 +20,4 @@ public:
 	~ArrayQueue();
 };
 
-#include "ArrayQueue.cpp"
+#include "../src/ArrayQueue.cpp"
