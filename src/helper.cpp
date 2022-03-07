@@ -32,6 +32,7 @@ bool depart(){
 			if ( currentTime < customer.getArrivalTime() ) currentTime = customer.getArrivalTime();
 			currentTime += customer.getWaitingTime(); // calcs departure time 
 			totalWaitingTime += (currentTime - customer.getArrivalTime());
+			std::cout << customer.getArrivalTime() << "A "<< currentTime << "C " << totalWaitingTime << "W " << std::endl;
 			EventQueue.enqueue(Event(currentTime, "departure")); // creates a newEvent for each customers type
 			bankQueue.dequeue();
 			return true;
