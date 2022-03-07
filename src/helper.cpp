@@ -31,8 +31,7 @@ bool depart(){
 			Customer customer = bankQueue.peekFront(); // sets the front of the bank q to customer
 			if ( currentTime < customer.getArrivalTime() ) currentTime = customer.getArrivalTime();
 			currentTime += customer.getWaitingTime(); // calcs departure time 
-			totalWaitingTime += (currentTime - customer.getArrivalTime());
-			std::cout << customer.getArrivalTime() << "A "<< currentTime << "C " << totalWaitingTime << "W " << std::endl;
+			totalWaitingTime += (currentTime - customer.getArrivalTime() - customer.getWaitingTime());
 			EventQueue.enqueue(Event(currentTime, "departure")); // creates a newEvent for each customers type
 			bankQueue.dequeue();
 			return true;
@@ -44,7 +43,6 @@ bool arrive(){
 		currentTime = fileQueue.peekFront().getArrivalTime(); // sets the current time to arrival time of customer
 		EventQueue.enqueue(Event(currentTime, "arrival"));
 		currentTime += fileQueue.peekFront().getWaitingTime(); // sets the current time to actual departureTime
-		totalWaitingTime += (currentTime - fileQueue.peekFront().getArrivalTime());
 		EventQueue.enqueue(Event(currentTime, "departure")); // creates a newEvent for each customers type
 		fileQueue.dequeue(); // takes off the customer off the queue
 		isTellerAvailable = false;
